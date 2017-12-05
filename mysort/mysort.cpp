@@ -45,6 +45,17 @@ class Mysort {
 			}
 		}
 	}
+	void shellsort(vector<int> &arr) {
+		for (int gap = arr.size()/2; gap > 0; gap/=2) {
+			for (int i = gap; i < arr.size(); i++) {
+				int j = i;
+				while (j-gap >= 0 && arr[j] < arr[j-gap]) {
+					swap(arr, j, j-gap);
+					j = j-gap;
+				}
+			}
+		}
+	}
 };
 
 int main() {
@@ -63,7 +74,8 @@ int main() {
 			cout << array[i] << " ";
 		}
 		cout << endl;
-		sort.insertsort(array);
+		sort.shellsort(array);
+		//sort.insertsort(array);
 		//sort.bubblesort(array);
 		//sort.selectsort(array);
 		cout << "this is your sorted array !" << endl;
