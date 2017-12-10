@@ -56,6 +56,38 @@ class Mysort {
 			}
 		}
 	}
+
+	/*  heapsort */
+	void adjustheap(vector<int>&arr, int i, int length) {
+		int temp = arr[i];  // current value
+		for (int k = 2*i+1; k < length; k = k*2+1) {
+			if (k+1 < length && arr[k] < arr[k+1]) {
+				k++;   // find the bigger number between left son and right son
+			}
+			if (temp < arr[k]) {
+				arr[i] = arr[k];
+				i = k;
+			} else {
+				break;
+			}
+			arr[i] = temp;
+		}
+	}
+
+	void heapsort(vector<int>& arr) {
+		// construct big heap
+		for (int i = arr.size()/2-1; i >= 0; i--) {
+			// begin with the first not leaf node
+			adjustheap(arr, i, arr.size());
+		}
+
+		// find the bigest number and then swap it and the adjust the heap
+		for (int i = arr.size()-1; i > 0; i--) {
+			swap(arr, 0, i); // swap the biggest number and the end of the heap
+			adjustheap(arr, 0, i); // adjust the heap and now the size of the heap is i
+		}
+	}
+
 };
 
 int main() {
@@ -74,7 +106,8 @@ int main() {
 			cout << array[i] << " ";
 		}
 		cout << endl;
-		sort.shellsort(array);
+		sort.heapsort(array);
+		//sort.shellsort(array);
 		//sort.insertsort(array);
 		//sort.bubblesort(array);
 		//sort.selectsort(array);
